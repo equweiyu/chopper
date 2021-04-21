@@ -166,7 +166,12 @@ Future<http.Request> toHttpRequest(
       baseRequest.bodyFields = body;
     } else {
       try {
-        baseRequest.bodyFields = body.toJson() as Map<String, String>;
+        Map<String, dynamic> json = body.toJson();
+        var bodyFields = <String, String>{};
+        for (var e in json.entries) {
+          bodyFields[e.key] = e.value.toString();
+        }
+        baseRequest.bodyFields = bodyFields;
       } catch (e) {
         throw ArgumentError.value('$body', 'body');
       }
