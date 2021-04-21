@@ -166,7 +166,7 @@ Future<http.Request> toHttpRequest(
       baseRequest.bodyFields = body;
     } else {
       try {
-        baseRequest.bodyFields = jsonEncode(body.toJson());
+        baseRequest.body = jsonEncode(body.toJson());
       } catch (e) {
         throw ArgumentError.value('$body', 'body');
       }
